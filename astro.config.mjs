@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();    
 // Importa o cliente TinaCMS
 export const client = createClient({
-  url: process.env.NEXT_PUBLIC_TINA_CONTENT_URL || "http://localhost:4001/graphql",
+  url: process.env.NEXT_PUBLIC_TINA_CONTENT_URL || "http://localhost:4321/admin",
   token: process.env.TINA_TOKEN,
   queries,
 });

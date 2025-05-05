@@ -9,7 +9,7 @@ import { queries } from "./types";
  */
 
 export const client = createClient({
-  url: process.env.NEXT_PUBLIC_TINA_CONTENT_URL || "http://localhost:4001/graphql",
+  url: process.env.NEXT_PUBLIC_TINA_CONTENT_URL || "http://localhost:4321/admin",
   token: process.env.TINA_TOKEN,
   queries,
   // Esta configuração será preenchida automaticamente quando o TinaCMS gerar o arquivo
