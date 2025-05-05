@@ -1,0 +1,97 @@
+---
+// Layout para o Template 2 - Glucose Control Guide
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glucose Control Guide</title>
+  <!-- Adicione qualquer metadado, fontes ou scripts do head que estejam na página original -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <!-- Header da página original, se houver -->
+    <div class="top-bar">
+      <p class="announcement">Special Offer: Limited Time Only</p>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <!-- Footer da página original -->
+    <div class="footer-content">
+      <p>&copy; 2025 Glucose Control Guide. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Disclaimer</a>
+      </div>
+      <p class="disclaimer">
+        These statements have not been evaluated by the Food and Drug Administration.
+        This product is not intended to diagnose, treat, cure, or prevent any disease.
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  /* Estilos globais para o layout do Template 2 */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  .top-bar {
+    background-color: #d9534f;
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  
+  .announcement {
+    font-weight: bold;
+  }
+  
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+  }
+  
+  .footer-links {
+    margin: 1rem 0;
+  }
+  
+  .footer-links a {
+    margin: 0 1rem;
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .disclaimer {
+    font-size: 0.8rem;
+    color: #aaa;
+    max-width: 800px;
+    margin: 1rem auto 0;
+  }
+  
+  /* Adicione mais estilos conforme necessário para replicar fielmente o layout original */
+</style>

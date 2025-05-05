@@ -1,0 +1,121 @@
+---
+import { client } from "../../../tina/__generated__/client";
+import FlowEmpowerLayout from "../../layouts/FlowEmpowerLayout.astro";
+
+export async function getStaticPaths() {
+  const pagesResponse = await client.queries.template1Connection();
+  
+  return pagesResponse.data.template1Connection.edges.map((edge: { node: { _sys: { filename: string } } }) => {
+    return {
+      params: { 
+        slug: edge.node._sys.filename 
+      },
+      props: {
+        data: edge.node,
+      },
+    };
+  });
+}
+
+const { data } = Astro.props;
+---
+
+<FlowEmpowerLayout>
+  <!-- Reproduzir exatamente o layout da página https://getflowempower.com/ps/pscollins01 -->
+  <div class="hero-section">
+    <h1>{data.title}</h1>
+    <h2>{data.subtitle}</h2>
+    
+    {data.mainImage && (
+      <img src={data.mainImage} alt={data.title} />
+    )}
+    
+    <div class="main-content">
+      <!-- O conteúdo rich-text do TinaCMS -->
+      {data.content}
+    </div>
+    
+    <a href={data.ctaButtonUrl} class="cta-button">
+      {data.ctaButtonText}
+    </a>
+
+    <!-- Seção de depoimentos -->
+    {data.testimonials && data.testimonials.length > 0 && (
+      <div class="testimonials">
+        {data.testimonials.map((testimonial: { avatar?: string; text: string; name: string }) => (
+          <div class="testimonial">
+            {testimonial.avatar && (
+              <img src={testimonial.avatar} alt={testimonial.name} />
+            )}
+            <p>{testimonial.text}</p>
+            <p class="name">{testimonial.name}</p>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</FlowEmpowerLayout>
+
+<style>
+  /* Estilize a página exatamente como a original */
+  .hero-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+  
+  .main-content {
+    text-align: left;
+    margin: 2rem 0;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    background-color: #ff6b00;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .testimonials {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .testimonial {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    max-width: 300px;
+  }
+  
+  .testimonial img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  
+  .testimonial .name {
+    font-weight: bold;
+    margin-top: 1rem;
+  }
+  
+  /* Adicione mais estilos conforme necessário para replicar fielmente a página original */
+</style>

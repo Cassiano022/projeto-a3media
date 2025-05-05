@@ -1,11 +1,31 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import { client } from "../tina/__generated__/client";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Obter as primeiras 10 páginas de cada template para exibir na página inicial
+const template1Pages = await client.queries.template1Connection({
+  first: 10,
+});
+
+const template2Pages = await client.queries.template2Connection({
+  first: 10,
+});
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A3 Media - Teste de Templates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>A3 Media - Teste de Templates</h1>
+    <p>Demonstração de páginas clonadas usando Astro e TinaCMS</p>
+  </header>
+
+  <main>
+    <section class="template-section">
+      <h2>Template 1 - Flow Empower</h2>
+      <p></p>

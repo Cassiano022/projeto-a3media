@@ -1,0 +1,205 @@
+---
+import { client } from "../../tina/__generated__/client.js";
+import GlucoseControlLayout from "../../layouts/GlucoseControlLayaout.astro";
+
+interface Benefit {
+  icon?: string;
+  title: string;
+  description: string;
+}
+
+export async function getStaticPaths() {
+  const pagesResponse = await client.queries.template2Connection();
+  
+  return pagesResponse.data.template2Connection.edges.map((edge: { node: { _sys: { filename: string } } }) => {
+    return {
+      params: { 
+        slug: edge.node._sys.filename 
+      },
+      props: {
+        data: edge.node,
+      },
+    };
+  });
+}
+
+const { data } = Astro.props;
+---
+
+<GlucoseControlLayout>
+  <!-- Reproduzir exatamente o layout da página https://glucosecontrolguide.com/fb/sgs/vsl3/prn-ca1/h1l1/ -->
+  <div class="vsl-container">
+    <div class="headline-section">
+      <h1>{data.headline}</h1>
+      <h2>{data.title}</h2>
+    </div>
+    
+    <div class="video-section">
+      <!-- Placeholder para o vídeo se existir na página original -->
+      <div class="video-placeholder">
+        <p>Video Placeholder</p>
+      </div>
+    </div>
+    
+    <div class="product-section">
+      {data.productImage && (
+        <img src={data.productImage} alt={data.title} class="product-image" />
+      )}
+      
+      <div class="pricing">
+        <p class="original-price">Original Price: ${data.price}</p>
+        <p class="discount-price">Today's Price: ${data.discountPrice}</p>
+      </div>
+      
+      <a href="#order" class="cta-button">
+        {data.ctaButtonText}
+      </a>
+    </div>
+    
+    <div class="main-content">
+      <!-- O conteúdo rich-text do TinaCMS -->
+      {data.content}
+    </div>
+    <!-- Seção de benefícios -->
+    {data.benefits && data.benefits.length > 0 && (
+      <div class="benefits-section">
+        <h3>Benefits</h3>
+        <div class="benefits-grid">
+          {data.benefits.map((benefit: Benefit) => (
+            <div class="benefit">
+              {benefit.icon && (
+                <img src={benefit.icon} alt={benefit.title} class="benefit-icon" />
+              )}
+              <h4>{benefit.title}</h4>
+              <p>{benefit.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+    
+    <div id="order" class="order-section">
+      <h3>Order Now</h3>
+      <p class="discount-message">Limited Time Offer: ${data.discountPrice}</p>
+      <a href="#" class="order-button">
+        Order Now
+      </a>
+    </div>
+  </div>
+</GlucoseControlLayout>
+
+<style>
+  /* Estilize a página exatamente como a original */
+  .vsl-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+  
+  .headline-section {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: #d9534f;
+    margin-bottom: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  .video-section {
+    margin-bottom: 2rem;
+  }
+  
+  .video-placeholder {
+    background-color: #000;
+    color: #fff;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .product-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .product-image {
+    max-width: 300px;
+    margin-bottom: 1rem;
+  }
+  
+  .pricing {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .original-price {
+    text-decoration: line-through;
+    color: #888;
+  }
+  
+  .discount-price {
+    font-size: 1.5rem;
+    color: #d9534f;
+    font-weight: bold;
+  }
+  
+  .cta-button, .order-button {
+    display: inline-block;
+    background-color: #5cb85c;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    margin: 1rem 0;
+  }
+  
+  .main-content {
+    margin: 2rem 0;
+  }
+  
+  .benefits-section {
+    margin: 2rem 0;
+  }
+  
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .benefit {
+    text-align: center;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .benefit-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+  
+  .order-section {
+    text-align: center;
+    padding: 2rem;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-top: 2rem;
+  }
+  
+  /* Adicione mais estilos conforme necessário para replicar fielmente a página original */
+</style>

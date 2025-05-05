@@ -1,0 +1,84 @@
+---
+// Layout para o Template 1 - Flow Empower
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow Empower</title>
+  <!-- Adicione qualquer metadado, fontes ou scripts do head que estejam na página original -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <!-- Header da página original, se houver -->
+    <div class="logo">
+      <!-- Logo ou nome da marca -->
+      <h3>Flow Empower</h3>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer>
+    <!-- Footer da página original -->
+    <div class="footer-content">
+      <p>&copy; 2025 Flow Empower. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  /* Estilos globais para o layout do Template 1 */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #333;
+  }
+  
+  header {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 1rem 2rem;
+  }
+  
+  .logo {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  footer {
+    background-color: #f8f8f8;
+    padding: 2rem;
+    margin-top: 3rem;
+    text-align: center;
+  }
+  
+  .footer-links {
+    margin-top: 1rem;
+  }
+  
+  .footer-links a {
+    margin: 0 1rem;
+    color: #555;
+    text-decoration: none;
+  }
+  
+  /* Adicione mais estilos conforme necessário para replicar fielmente o layout original */
+</style>
