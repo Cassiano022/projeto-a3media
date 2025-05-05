@@ -17,7 +17,21 @@ export async function getStaticPaths() {
   });
 }
 
-const { data } = Astro.props;
+interface PageData {
+  title: string;
+  subtitle?: string;
+  mainImage?: string;
+  content?: string;
+  ctaButtonUrl?: string;
+  ctaButtonText?: string;
+  testimonials?: {
+    avatar?: string;
+    text: string;
+    name: string;
+  }[];
+}
+
+const { data } = Astro.props as { data: PageData };
 ---
 
 <FlowEmpowerLayout>

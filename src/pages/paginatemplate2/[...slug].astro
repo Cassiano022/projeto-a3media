@@ -1,5 +1,5 @@
 ---
-import { client } from "../../tina/__generated__/client.js";
+import { client } from "../../../tina/__generated__/client";
 import GlucoseControlLayout from "../../layouts/GlucoseControlLayaout.astro";
 
 interface Benefit {
@@ -23,7 +23,18 @@ export async function getStaticPaths() {
   });
 }
 
-const { data } = Astro.props;
+interface PageData {
+  headline: string;
+  title: string;
+  productImage?: string;
+  price: number;
+  discountPrice: number;
+  ctaButtonText: string;
+  content: string;
+  benefits?: Benefit[];
+}
+
+const { data } = Astro.props as { data: PageData };
 ---
 
 <GlucoseControlLayout>

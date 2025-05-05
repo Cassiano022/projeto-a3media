@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import tinaPlugin from "@tinacms/astro";
 import { tina } from 'astro-tina';
 import { createClient } from 'tinacms/dist/client';
 import { queries } from './tina/__generated__/types.js';
