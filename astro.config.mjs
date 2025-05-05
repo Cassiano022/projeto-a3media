@@ -1,5 +1,19 @@
 import { defineConfig } from 'astro/config';
-import tina from "@tinacms/astro";
+import tinaPlugin from "@tinacms/astro";
+import { tina } from 'astro-tina';
+import { createClient } from 'tinacms/dist/client';
+import { queries } from './tina/__generated__/types.js';
+import dotenv from 'dotenv';
+dotenv.config();    
+// Importa o cliente TinaCMS
+export const client = createClient({
+  url: process.env.NEXT_PUBLIC_TINA_CONTENT_URL || "http://localhost:4001/graphql",
+  token: process.env.TINA_TOKEN,
+  queries,
+});
+
+
+
 
 // https://astro.build/config
 export default defineConfig({
